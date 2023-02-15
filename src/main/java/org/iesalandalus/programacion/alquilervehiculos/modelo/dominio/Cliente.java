@@ -45,7 +45,7 @@ public class Cliente {
 		return dni;
 	}
 	
-	public void setDni(String dni) {
+	private void setDni(String dni) {
 		if (dni == null) 
 			throw new NullPointerException("ERROR: El DNI no puede ser nulo.");
 		
