@@ -20,7 +20,7 @@ public class Alquileres {
 
 	public List<Alquiler> get() {
 		
-		List<Alquiler> copia = new ArrayList<Alquiler>();
+		List<Alquiler> copia = new ArrayList<>();
 		for (int i=0; i<coleccionAlquileres.size(); i++) {
 			copia.add(coleccionAlquileres.get(i));
 		}

@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.alquilervehiculos.modelo;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
@@ -57,7 +58,7 @@ public class Modelo {
 		} else if (turismoBuscado == null) {
 			throw new OperationNotSupportedException("ERROR: No existe el turismo del alquiler.");
 		} else {
-			Alquiler alquilerNuevo = new Alquiler(clienteBuscado, turismoBuscado, alquiler.getFechaAlquiler());
+		Alquiler alquilerNuevo = new Alquiler(clienteBuscado, turismoBuscado, alquiler.getFechaAlquiler());
 			this.alquileres.insertar(alquilerNuevo);
 		} 
 	}
@@ -107,23 +108,39 @@ public class Modelo {
     }
     
     public List<Cliente> getClientes() {
-        return clientes.get();
+    	List<Cliente> listaCopia = new ArrayList<>();
+		for (Cliente it : clientes.get())
+			listaCopia.add(new Cliente(it));
+		return listaCopia;
     }
 
     public List<Turismo> getTurismos() {
-        return turismos.get();
+    	List<Turismo> listaCopia = new ArrayList<>();
+		for (Turismo it : turismos.get())
+			listaCopia.add(new Turismo(it));
+		return listaCopia;
     }
 
     public List<Alquiler> getAlquileres() {
-        return alquileres.get();
+    	List<Alquiler> listaCopia = new ArrayList<>();
+		for (Alquiler it : alquileres.get())
+			listaCopia.add(new Alquiler(it));
+		return listaCopia;
+    
     }
 
     public List<Alquiler> getAlquileres(Cliente cliente) {
-        return alquileres.get(cliente);
+    	List<Alquiler> listaCopia = new ArrayList<>();
+        for (Alquiler it : alquileres.get(cliente))
+        	listaCopia.add(new Alquiler(it));
+        return listaCopia;
     }
 
     public List<Alquiler> getAlquileres(Turismo turismo) {
-        return alquileres.get(turismo);
+    	List<Alquiler> listaCopia = new ArrayList<>();
+        for (Alquiler it : alquileres.get(turismo))
+        	listaCopia.add(new Alquiler(it));
+        return listaCopia;
     }
 	
 }	
