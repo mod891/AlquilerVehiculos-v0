@@ -103,7 +103,7 @@ public class Alquileres {
 		if (!coleccionAlquileres.contains(alquiler))
 			return null;
 		else 
-			return 	alquiler;
+			return 	coleccionAlquileres.get(coleccionAlquileres.indexOf(alquiler));
 	}
 	
 	public void borrar(Alquiler alquiler) throws OperationNotSupportedException {

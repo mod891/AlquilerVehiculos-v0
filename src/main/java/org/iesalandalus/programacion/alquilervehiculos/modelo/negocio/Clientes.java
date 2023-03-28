@@ -8,43 +8,43 @@ import javax.naming.OperationNotSupportedException;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 
 public class Clientes {
-	List<Cliente> clientes;
+	List<Cliente> coleccionClientes;
 	
 	public Clientes() {
-		clientes = new ArrayList<>();
+		coleccionClientes = new ArrayList<>();
 	}
 	
 	public List<Cliente> get() {
-		return clientes;
+		return coleccionClientes;
 	}
 	
 	public int getCantidad() {
-		return clientes.size();
+		return coleccionClientes.size();
 	}
 	
 	public void insertar(Cliente cliente) throws OperationNotSupportedException {
 		if (cliente == null) 
 			throw new NullPointerException("ERROR: No se puede insertar un cliente nulo.");
-		if (clientes.contains(cliente))
+		if (coleccionClientes.contains(cliente))
 			throw new OperationNotSupportedException("ERROR: Ya existe un cliente con ese DNI.");
 		
-		clientes.add(cliente);
+		coleccionClientes.add(cliente);
 	}
 	
 	public Cliente buscar(Cliente cliente) {
 		if (cliente == null) 
 			throw new NullPointerException("ERROR: No se puede buscar un cliente nulo.");
 		
-		if (clientes.contains(cliente))
-			return cliente;
+		if (coleccionClientes.contains(cliente))
+			return coleccionClientes.get(coleccionClientes.indexOf(cliente));
 		return null;
 	}
 	
 	public void borrar(Cliente cliente) throws OperationNotSupportedException {
 		if (cliente == null)
 			throw new NullPointerException("ERROR: No se puede borrar un cliente nulo.");
-		if (clientes.contains(cliente))
-			clientes.remove(cliente);
+		if (coleccionClientes.contains(cliente))
+			coleccionClientes.remove(cliente);
 		else
 			throw new OperationNotSupportedException("ERROR: No existe ningún cliente con ese DNI.");
 	}
@@ -52,13 +52,13 @@ public class Clientes {
 	public void modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException {
 		if (cliente == null)
 			throw new NullPointerException("ERROR: No se puede modificar un cliente nulo.");
-		if (clientes.contains(cliente)) {
+		if (coleccionClientes.contains(cliente)) {
 			if (nombre != null && !nombre.trim().isEmpty()) 
 				cliente.setNombre(nombre);
 			if (telefono != null && !telefono.trim().isEmpty()) 
 				cliente.setTelefono(telefono);
 		
-			clientes.set(clientes.indexOf(cliente),cliente);
+			coleccionClientes.set(coleccionClientes.indexOf(cliente),cliente);
 		} else
 			throw new OperationNotSupportedException("ERROR: No existe ningún cliente con ese DNI.");
 	}

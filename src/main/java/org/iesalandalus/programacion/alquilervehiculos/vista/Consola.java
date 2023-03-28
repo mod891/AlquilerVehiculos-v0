@@ -9,7 +9,7 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 public class Consola {
-	private final static String PATRON_FECHA = "^([0-2][0-9]|3[0-1])\\/(0[1-9]|1[0-2])\\2(\\d{4})$";// redo
+	private final static String PATRON_FECHA = "^([0-2][0-9]|3[0-1])\\/(0[1-9]|1[0-2])\\/[0-9]{4}$";
 	private final static DateTimeFormatter FORMATO_FECHA= DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	private Consola() {
@@ -96,7 +96,7 @@ public class Consola {
 	return leerCadena("introduzca un telefono: ");
 	}
 	
-	public static Object leerTurismo() {
+	public static Turismo leerTurismo() {
 		String marca=leerCadena("Introduzca la marca del vehiculo: ");
 		String modelo=leerCadena("Introduzca el modelo del vehiculo: ");
 		int cilindrada=leerEntero("Introduzca la cilindrada del vehiculo: ");

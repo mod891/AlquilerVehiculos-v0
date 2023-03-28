@@ -32,7 +32,7 @@ public class Modelo {
 	public void insertar(Turismo turismo) throws OperationNotSupportedException {
 		
 		if (turismo==null) 
-			throw new NullPointerException();
+			throw new NullPointerException("ERROR: El turismo es nulo");
 		
 		Turismo nuevo = new Turismo(turismo);
 		this.turismos.insertar(nuevo);
@@ -40,7 +40,7 @@ public class Modelo {
 
 	public void insertar(Cliente cliente) throws OperationNotSupportedException {
 		if (cliente==null) 
-			throw new NullPointerException();
+			throw new NullPointerException("ERROR: El cliente es nulo");
 
 		Cliente nuevo = new Cliente(cliente);
 		this.clientes.insertar(nuevo);
@@ -64,18 +64,22 @@ public class Modelo {
 	}
 	
 	public Cliente buscar(Cliente cliente) {
-		Cliente clienteBuscado = new Cliente(clientes.buscar(cliente));
-		return clienteBuscado;
+		Cliente clienteBuscado = clientes.buscar(cliente);
+		if (clienteBuscado == null) return null;
+		else return new Cliente(clienteBuscado);
+		
 	}
 
 	public Turismo buscar(Turismo turismo) {
-		Turismo turismoBuscado = new Turismo(turismos.buscar(turismo));
-		return turismoBuscado;
+		Turismo buscado = turismos.buscar(turismo);
+		if (buscado == null) return null;
+		else return  new Turismo(buscado);
 	}
 
 	public Alquiler buscar(Alquiler alquiler) {
-		Alquiler alquilerBuscado = new Alquiler(alquileres.buscar(alquiler));
-		return alquilerBuscado;
+		Alquiler alquilerBuscado = alquileres.buscar(alquiler);
+		if (alquilerBuscado == null) return null;
+		else return new Alquiler(alquilerBuscado);
 	}
 
 	public void modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException {
@@ -92,15 +96,21 @@ public class Modelo {
 		if (this.alquileres.buscar(alquiler) == null) 
 			throw new OperationNotSupportedException("ERROR: No existe el alquiler a devolver.");
 		 
-		alquiler.devolver(fechadevolucion);
+		alquiler.devolver(fechadevolucion); // faltaría guardarlo de nuevo en la lista, no se reflejan los cambios
 	}
 	
     public void borrar(Cliente cliente) throws OperationNotSupportedException {
-        clientes.borrar(cliente);
+       for (Alquiler alquiler : alquileres.get(cliente)) 
+    	   alquileres.borrar(alquiler);
+    	
+    	clientes.borrar(cliente);
     }
 
     public void borrar(Turismo turismo) throws OperationNotSupportedException {
-        turismos.borrar(turismo);
+        for (Alquiler alquiler : alquileres.get(turismo)) 
+     	   alquileres.borrar(alquiler);
+     	
+    	turismos.borrar(turismo);
     }
 
     public void borrar(Alquiler alquiler) throws OperationNotSupportedException {
@@ -124,7 +134,7 @@ public class Modelo {
     public List<Alquiler> getAlquileres() {
     	List<Alquiler> listaCopia = new ArrayList<>();
 		for (Alquiler it : alquileres.get())
-			listaCopia.add(new Alquiler(it));
+			listaCopia.add(new Alquiler(it.getCliente(),it.getTurismo(),it.getFechaAlquiler()));
 		return listaCopia;
     
     }
@@ -132,14 +142,14 @@ public class Modelo {
     public List<Alquiler> getAlquileres(Cliente cliente) {
     	List<Alquiler> listaCopia = new ArrayList<>();
         for (Alquiler it : alquileres.get(cliente))
-        	listaCopia.add(new Alquiler(it));
+        	listaCopia.add(new Alquiler(it.getCliente(),it.getTurismo(),it.getFechaAlquiler()));
         return listaCopia;
     }
 
     public List<Alquiler> getAlquileres(Turismo turismo) {
     	List<Alquiler> listaCopia = new ArrayList<>();
         for (Alquiler it : alquileres.get(turismo))
-        	listaCopia.add(new Alquiler(it));
+        	listaCopia.add(new Alquiler(it.getCliente(),it.getTurismo(),it.getFechaAlquiler()));
         return listaCopia;
     }
 	

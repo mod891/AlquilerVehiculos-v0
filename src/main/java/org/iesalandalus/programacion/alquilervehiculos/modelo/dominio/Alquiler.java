@@ -33,7 +33,7 @@ public class Alquiler {
 	}
 	
 	public void setFechaAlquiler(LocalDate fechaAlquiler) {
-		// La fecha de alquiler no puede ser posterior a hoy.
+
 		if (fechaAlquiler == null) 
 			throw new NullPointerException("ERROR: La fecha de alquiler no puede ser nula.");
 		
@@ -104,6 +104,7 @@ public class Alquiler {
 	}
 	@Override
 	public String toString() {
+		
 		String str = null;
 		if (fechaDevolucion == null) {
 			str = String.format("%s <---> %s, %s - %s (%d€)", cliente, turismo,
